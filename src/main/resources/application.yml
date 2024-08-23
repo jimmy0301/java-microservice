@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://yulunko123:jimmy030176123@cluster0.vkiwmvt.mongodb.net/Chat?retryWrites=true&w=majority&appName=Cluster0
