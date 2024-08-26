@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.UserRepository;
 import com.example.demo.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,15 @@ public class UserService {
 
 //    @Autowired
 //    private MongoTemplate mongoTemplate;
+    @Value("${spring.encoder.length}")
+    private int encoderLength;
     @Autowired
     private UserRepository userRepository;
-    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(10);
+
+    private BCryptPasswordEncoder encoder;
 
     public User saveUser(User user) {
+        encoder = new BCryptPasswordEncoder(encoderLength);
         user.setPassword(encoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
